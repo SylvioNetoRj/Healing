@@ -47,9 +47,16 @@ def login_view(request):
               user = auth.authenticate(request, username=username, password=senha)
 
               if user:
+                    # print(request.user)
                      auth.login(request, user)
                      return redirect('paciente/home')
+              
               messages.add_message(request, constants.ERROR, 'Usuario ou senha invalidos')
               return redirect('/usuarios/login')
+       
+def sair(request):
+       #print(request.user.is_authenticated)
+       auth.logout(request)
+       return redirect('/usuarios/login')
 
 
